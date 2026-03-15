@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
 import VerifyEmail from './pages/VerifyEmail';
-import Login from './pages/Login'; // 1. Import Login
+import Login from './pages/Login'; 
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -16,13 +17,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         
         {/* 3. Dummy halaman Dashboard setelah sukses Login */}
-        <Route path="/dashboard" element={
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-                <h1 className="text-3xl font-bold text-green-600 mb-4">Selamat Datang di Dashboard!</h1>
-                <p className="text-gray-600">Anda berhasil login dan token telah disimpan.</p>
-                <button onClick={() => { localStorage.clear(); window.location.href='/login'; }} className="mt-4 px-4 py-2 bg-red-500 text-white rounded">Logout</button>
-            </div>
-        } />
+        <Route path="/dashboard" element={<Dashboard />} />
+        
       </Routes>
     </Router>
   );
