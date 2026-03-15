@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from '../api/axios'; // Menggunakan konfigurasi axios yang sudah dibuat
+import axios from '../api/axios'; 
 
 export default function Register() {
     const [formData, setFormData] = useState({
