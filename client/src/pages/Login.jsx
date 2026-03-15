@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from '../api/axios'; // Menggunakan axios yang sudah kita set
+import axios from '../api/axios'; 
 
 export default function Login() {
     const [formData, setFormData] = useState({
