@@ -12,9 +12,9 @@ class ApiGamesService
 
     public function __construct()
     {
-        $this->merchantId = env('M260312ETYL8041GO');
-        $this->secretKey = env('9da3b162be00be3dcabb8afa52d1a159fa2e5b3db9c3aeb40353c94bd25638ba');
-        $this->baseUrl = env('APIGAMES_BASE_URL', 'https://v1.apigames.id');
+        $this->merchantId = config('services.apigames.merchant_id');
+        $this->secretKey = config('services.apigames.secret_key');
+        $this->baseUrl = config('services.apigames.base_url');
     }
 
     public function getProducts()
@@ -30,5 +30,26 @@ class ApiGamesService
         ]);
 
         return $response->json();
+    }
+
+    public function checkAccount($gameCode, $userId)
+    {
+        $signature = md5($this->merchantId . $this->secretKey);
+        $url = "{$this->baseUrl}/merchant/{$this->merchantId}/cek-username/{$gameCode}";
+
+        $response = Http::get($url, [
+            'user_id' => $userId,
+            'signature' => $signature
+        ]);
+
+        $data = $response->json();
+
+        // --- ALAT PELACAK: Menyisipkan URL asli ke dalam error ---
+        if (is_array($data)) {
+            $data['debug_url_yang_dikirim'] = $url;
+            $data['debug_merchant_id'] = $this->merchantId ?? 'KOSONG!';
+        }
+
+        return $data;
     }
 }
