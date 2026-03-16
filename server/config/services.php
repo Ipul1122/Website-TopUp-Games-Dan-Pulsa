@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'apigames' => [
+        'merchant_id' => env('APIGAMES_MERCHANT_ID', 'M260312ETYL8041GO'),
+        'secret_key'  => env('APIGAMES_SECRET_KEY', '9da3b162be00be3dcabb8afa52d1a159fa2e5b3db9c3aeb40353c94bd25638ba'),
+        'base_url'    => env('APIGAMES_BASE_URL', 'https://v1.apigames.id'),
+    ],
+
 ];
