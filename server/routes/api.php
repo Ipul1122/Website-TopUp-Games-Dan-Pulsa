@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController; 
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\GameAccountController;
+use App\Http\Controllers\Api\CheckoutController ;
+
 
 // Auth Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -31,4 +33,5 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Rute untuk memeriksa akun game
     Route::post('/check-account', [GameAccountController::class, 'check']);
+    Route::post('/checkout', [CheckoutController::class, 'process']);
 });
