@@ -3,6 +3,7 @@ import Register from './pages/Register';
 import VerifyEmail from './pages/VerifyEmail';
 import Login from './pages/Login'; 
 import Dashboard from './pages/Dashboard';
+import HistoryPlayer from './pages/HistoryPlayer';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         
         {/* 3. Dummy halaman Dashboard setelah sukses Login */}
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/history" element={<HistoryPlayer />} />
         
       </Routes>
     </Router>

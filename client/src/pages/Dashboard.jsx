@@ -106,11 +106,14 @@ export default function Dashboard() {
                 onSuccess: function(result) {
                     alert("Pembayaran Berhasil! Diamond sedang diproses.");
                     closeCheckoutModal();
-                    // Nanti kita akan tambahkan auto-refresh atau redirect di sini
+                    // OTOMATIS PINDAH KE HALAMAN HISTORY SAAT SUKSES
+                    navigate('/history'); 
                 },
                 onPending: function(result) {
                     alert("Menunggu pembayaran Anda!");
                     closeCheckoutModal();
+                    // OTOMATIS PINDAH KE HALAMAN HISTORY SAAT PENDING
+                    navigate('/history');
                 },
                 onError: function(result) {
                     alert("Pembayaran Gagal!");
@@ -118,6 +121,7 @@ export default function Dashboard() {
                 },
                 onClose: function() {
                     alert("Anda menutup jendela pembayaran sebelum menyelesaikan transaksi.");
+                    closeCheckoutModal();
                 }
             });
 
@@ -134,9 +138,14 @@ export default function Dashboard() {
             <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-8 bg-white p-4 rounded shadow">
                     <h1 className="text-2xl font-bold text-blue-600">Ipul TopUp Dashboard</h1>
-                    <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
-                        Logout
-                    </button>
+                    <div className="flex gap-2">
+                        <button onClick={() => navigate('/history')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                            History
+                        </button>
+                        <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                            Logout
+                        </button>
+                    </div>
                 </div>
 
                 {errorMsg && <div className="bg-red-100 text-red-700 p-4 rounded mb-6">{errorMsg}</div>}

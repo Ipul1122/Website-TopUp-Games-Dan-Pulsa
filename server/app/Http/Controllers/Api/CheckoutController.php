@@ -56,6 +56,7 @@ class CheckoutController extends Controller
 
             // 5. Simpan data transaksi ke Database kita dengan status PENDING
             Transaction::create([
+                'user_id' => $request->user()->id,
                 'order_id' => $orderId,
                 'game_code' => $request->game_code,
                 'user_game_id' => $request->user_game_id,

@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('order_id')->unique(); // Nomor struk (Misal: TRX-12345)
-            $table->string('game_code'); // Misal: mobilelegend
-            $table->string('user_game_id'); // ID Game Pembeli
-            $table->string('product_code'); // Kode dari APIGames (Misal: ML3)
-            $table->integer('amount'); // Harga
-            $table->string('status')->default('pending'); // pending, success, failed
-            $table->string('snap_token')->nullable(); // Token dari Midtrans
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('order_id')->unique(); 
+            $table->string('game_code'); 
+            $table->string('user_game_id'); 
+            $table->string('product_code'); 
+            $table->integer('amount'); 
+            $table->string('status')->default('pending');
+            $table->string('snap_token')->nullable(); 
             $table->timestamps();
         });
     }

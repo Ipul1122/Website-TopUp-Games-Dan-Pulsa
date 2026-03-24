@@ -19,11 +19,8 @@ class ApiGamesService
 
     public function getProducts()
     {
-        // Berdasarkan standar dokumentasi APIGames untuk melihat daftar profil/produk
-        // (Pastikan mengecek dokumentasi APIGames apakah menggunakan pemisah ":" atau tidak di rumusnya)
         $signature = md5($this->merchantId . $this->secretKey);
 
-        // Menembak endpoint produk APIGames (Umumnya di /merchant/produk)
         $response = Http::post($this->baseUrl . '/merchant/produk', [
             'merchant' => $this->merchantId,
             'signature' => $signature,
@@ -51,5 +48,22 @@ class ApiGamesService
         }
 
         return $data;
+    }
+
+    public function createTransaction($refId, $productCode, $destination)
+    {
+        $signature = md5($this->merchantId . $this->secretKey . $refId);
+
+        $url = "{$this->baseUrl}/v2/transaksi";
+
+        $response = Http::post($url, [
+            'ref_id' => $refId,               
+            'merchant_id' => $this->merchantId,
+            'produk' => $productCode,         
+            'tujuan' => $destination,                     
+            'signature' => $signature,
+        ]);
+
+        return $response->json();
     }
 }
